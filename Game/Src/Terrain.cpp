@@ -18,30 +18,25 @@
 Terrain::Terrain() {}
 Terrain::~Terrain() {}
 
-void Terrain::LoadGrid(int lon, int lar){
 
+/* Grille de lon x lar : fonctionnelle */
+void Terrain::LoadGrid(int lon, int lar){
   glPushMatrix();
   for (int i = 0 ; i < lar ; i++){
-    glPushMatrix();
     glBegin(GL_LINES);
-    glTranslatef(i,0,0);
-    glVertex3f(0.0F,0.0F,0.0F);
-    glTranslatef(0,0,lon);
-    glVertex3f(0.0F,0.0F,0.0F);
+    glVertex3i(i,0,0);
+    glVertex3i(i,0,-lon);
     glEnd();
-    glPopMatrix();
   }
   for (int i = 0 ; i < lon ; i++){
-    glPushMatrix();
     glBegin(GL_LINES);
-    glTranslatef(0,0,-i);
-    glVertex3f(0.0F,0.0F,0.0F);
-    glTranslatef(lar,0,0);
-    glVertex3f(0.0F,0.0F,0.0F);
+    glVertex3i(0,0,-i);
+    glVertex3i(lar,0,-i);
     glEnd();
-    glPopMatrix();
   }
-
   glPopMatrix();
+}
+
+void Terrain::LoadGap(int lon, int lar) {
 
 }

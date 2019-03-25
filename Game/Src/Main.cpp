@@ -13,6 +13,11 @@
 #include <GL/glu.h>
 
 #include "Terrain.h"
+#include "Commande.h"
+
+Terrain *terrain = new Terrain();
+Commande *cmd = new Commande();
+
 /* Variables globales                           */
 const float PI = 3.1415926535897932384626433832795;
 const float marge = 2.0F;
@@ -30,11 +35,9 @@ const float fov = 90 + marge;			// Taille ouverture caméra
 const float tmpFov = 15;	/* Pour reglage temporaire afin de mieux y voir */
 const float fovRatio = atan((gridX / 2.0F) / distCam) / atan((gridZ / 2.0F) / distCam); // Ratio d'ouverture vertical
 
-float camPOSX = gridX/2;
-float camPOSZ = -gridZ/2;
-float camPOSY = gridX/2;
 
-Terrain *terrain = new Terrain();
+
+
 								   /* Fonction d'initialisation des parametres     */
 								   /* OpenGL ne changeant pas au cours de la vie   */
 								   /* du programme                                 */
@@ -50,7 +53,7 @@ static void init(void) {
 	glEnable(GL_DEPTH_TEST);	/* Active l'élination des PC */
 	glEnable(GL_NORMALIZE);		/* Normalise les vecteurs pour calculs illum. */
 	glClearColor(0.25,0.25,0.25,1.0);
-
+	cmd->CommandeInit((int)gridX / 2, (int)gridX / 2, (int)-gridZ / 2 );
 
 }
 
@@ -69,7 +72,7 @@ static void display(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glPushMatrix();
-	gluLookAt(camPOSX, camPOSY, camPOSZ, camPOSX, 0, camPOSZ, 1, 0, 0);
+	gluLookAt(cmd->camPOSX, cmd->camPOSY, cmd->camPOSZ, cmd->camPOSX, 0, cmd->camPOSZ, 1, 0, 0);
 	scene();
 	glPopMatrix();
 	glFlush();
@@ -102,15 +105,8 @@ static void reshape(int wx, int wy) {
 /* d'une touche alphanumerique du clavier       */
 
 static void keyboard(unsigned char key, int x, int y) {
-	switch (key) {
-	case 'o':
-		printf("Camera's back to origin\n");
-		camPOSX = gridX/2;
-		camPOSY = gridX/2;
-		camPOSZ = -gridZ/2;
-		glutPostRedisplay();
-		break;
-	}
+	cmd->CamMove(key, gridX, gridZ);
+	
 
 }
 
@@ -120,33 +116,8 @@ static void keyboard(unsigned char key, int x, int y) {
 /*   - touches de fonction                      */
 
 static void special(int specialKey, int x, int y) {
-	switch (specialKey) {
-	case GLUT_KEY_UP:
-		camPOSX += 1;
-		glutPostRedisplay();
-		break;
-	case GLUT_KEY_DOWN:
-		camPOSX -= 1;
-		glutPostRedisplay();
-		break;
-	case GLUT_KEY_LEFT:
-		camPOSZ -= 1;
-		glutPostRedisplay();
-		break;
-	case GLUT_KEY_RIGHT:
-		camPOSZ += 1;
-		glutPostRedisplay();
-		break;
-	case GLUT_KEY_PAGE_UP:
-		camPOSY -= 1;
-		glutPostRedisplay();
-		break;
-	case GLUT_KEY_PAGE_DOWN:
-		camPOSY += 1;
-		glutPostRedisplay();
-		break;
-	}
-	printf("Camera poisition = (%f ; %f ; %f)\n", camPOSX, camPOSY, camPOSZ);
+	cmd->CamMoveSpecial(specialKey);
+	printf("Camera poisition = (%i ; %i ; %i)\n", cmd->camPOSX, cmd->camPOSY, cmd->camPOSZ);
 }
 
 /* Fonction exécutée automatiquement            */
