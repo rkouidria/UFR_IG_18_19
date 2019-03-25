@@ -1,0 +1,101 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;&
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*  Couleur
+rouge : D46A6A clair
+		AA3939 normal
+		801515 peu foncer
+		550000 foncer
+		
+bleu : 	4F628E clair
+		2E4272 normal
+		162955 peu foncer
+		061539 foncer
+		
+		1b7cdc ? un autre bleu
+		
+vert : 	55AA55 clair
+		2D882D normal
+		116611 peu foncer
+		004400 foncer
+		
+jaune : D4B16A clair
+		AA8939 normal
+		855C15 peu foncer
+		553900 foncer
+*/
+/*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+								Page
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
+
+body
+	{
+	width: 100vw;
+	height: calc(98vh - 72px);
+	max-height: calc(100vh - 72px);
+	/*background:linear-gradient(to bottom,#CECEE8 0%,#3A3ACA 100%);
+	background:linear-gradient(#e66465, #9198e5);
+	cursor:crosshair;*/
+	background-color: #222222;
+	background: url("../image/fond.jpg");
+	background-repeat: no-repeat;
+	background-size: 110% 110%;
+	margin-top: 72px;
+	font-size: 1vw;
+  font-family: Roboto, Arial, sans-serif;
+	padding-top: 2vh;
+	overflow-x: hidden;
+	}
+
+a
+	{
+	text-decoration: none;
+	display: block;
+	color: black;
+	}
