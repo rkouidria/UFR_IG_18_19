@@ -50,12 +50,12 @@ static void init(void) {
 	glEnable(GL_DEPTH_TEST);	/* Active l'élination des PC */
 	glEnable(GL_NORMALIZE);		/* Normalise les vecteurs pour calculs illum. */
 	glClearColor(0.25,0.25,0.25,1.0);
-	
-	
+
+
 }
 
 void scene(void) {
-	
+
 	glPushMatrix();
 	terrain->LoadGrid(gridX, gridZ);
 	//terrain->LoadGap(gridX, gridZ);
@@ -67,7 +67,7 @@ void scene(void) {
 
 static void display(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
+
 	glPushMatrix();
 	gluLookAt(camPOSX, camPOSY, camPOSZ, camPOSX, 0, camPOSZ, 1, 0, 0);
 	scene();
@@ -89,7 +89,7 @@ static void reshape(int wx, int wy) {
 	glViewport(0, 0, wx, wy);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	
+
 	gluPerspective(fov, fovRatio, 1.0, 700);
 	printf("\n fov : %f     ration : %f\n   gridX = %f      gridZ = %f\n",fov, fovRatio, gridX,gridZ);
 	printf("dist : %f     \n", distCam);
