@@ -99,11 +99,13 @@
     <Library Include="..\..\Lib\glut32.ms.lib" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Src\Camera.cpp" />
     <ClCompile Include="..\..\Src\Commande.cpp" />
     <ClCompile Include="..\..\Src\Main.cpp" />
     <ClCompile Include="..\..\Src\Terrain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\Camera.h" />
     <ClInclude Include="..\..\Src\Commande.h" />
     <ClInclude Include="..\..\Src\Terrain.h" />
   </ItemGroup>

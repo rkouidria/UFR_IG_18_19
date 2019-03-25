@@ -10,7 +10,9 @@
 #include <GL/glut.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+
 #include "Commande.h"
+#include "Camera.h"
 
 /* Variables globales                           */
 
@@ -26,43 +28,43 @@ void Commande::CommandeInit(int x, int y, int z) {
 	camPOSZ = z;
 }
 
-void Commande::CamMoveSpecial(int sk) {
+void Commande::CamMoveSpecial(int sk, Camera &cam) {
 	switch (sk) {
 	case GLUT_KEY_UP:
-		camPOSX += 1;
+		cam.camPOSX += 1;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_DOWN:
-		camPOSX -= 1;
+		cam.camPOSX -= 1;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_LEFT:
-		camPOSZ -= 1;
+		cam.camPOSZ -= 1;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_RIGHT:
-		camPOSZ += 1;
+		cam.camPOSZ += 1;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_PAGE_UP:
-		camPOSY -= 1;
+		cam.camPOSY -= 1;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_PAGE_DOWN:
-		camPOSY += 1;
+		cam.camPOSY += 1;
 		glutPostRedisplay();
 		break;
 	}
 
 }
 
-void Commande::CamMove(int sk, int gridX, int gridZ) {
+void Commande::CamMove(int sk, int gridX, int gridZ, Camera &cam) {
 	switch (sk) {
 	case 'o':
 		printf("Camera's back to origin\n");
-		camPOSX = gridX / 2;
-		camPOSY = gridX / 2;
-		camPOSZ = -gridZ / 2;
+		cam.camPOSX = gridX / 2;
+		cam.camPOSY = gridX / 2;
+		cam.camPOSZ = -gridZ / 2;
 		glutPostRedisplay();
 		break;
 	}

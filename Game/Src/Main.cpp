@@ -14,9 +14,11 @@
 
 #include "Terrain.h"
 #include "Commande.h"
+#include "Camera.h"
 
 Terrain *terrain = new Terrain();
 Commande *cmd = new Commande();
+Camera *camera1 = new Camera();
 
 /* Variables globales                           */
 const float PI = 3.1415926535897932384626433832795;
@@ -29,6 +31,7 @@ static int wPy = 50;               // Position verticale de la fenetre
 
 const float gridX = 500.0F;				// Taille plateau en X : 1X == 1 metre
 const float gridZ = 500.0F;				// Taille plateau en Z : 1Z == 1 metre
+
 const float distCam = 500.0F;
 //const float fov =  ((atan((gridX / 2.0F)/distCam))*(360.F/PI)) + marge;			// Taille ouverture caméra
 const float fov = 90 + marge;			// Taille ouverture caméra
@@ -53,7 +56,9 @@ static void init(void) {
 	glEnable(GL_DEPTH_TEST);	/* Active l'élination des PC */
 	glEnable(GL_NORMALIZE);		/* Normalise les vecteurs pour calculs illum. */
 	glClearColor(0.25,0.25,0.25,1.0);
-	cmd->CommandeInit((int)gridX / 2, (int)gridX / 2, (int)-gridZ / 2 );
+	//
+	//cmd->CommandeInit((int)gridX / 2, (int)gridX / 2, (int)-gridZ / 2 );
+	camera1->CameraInit((int)gridX / 2, (int)gridX / 2, (int)-gridZ / 2);
 
 }
 
@@ -72,7 +77,7 @@ static void display(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glPushMatrix();
-	gluLookAt(cmd->camPOSX, cmd->camPOSY, cmd->camPOSZ, cmd->camPOSX, 0, cmd->camPOSZ, 1, 0, 0);
+	gluLookAt(camera1->camPOSX, camera1->camPOSY, camera1->camPOSZ, camera1->camPOSX, 0, camera1->camPOSZ, 1, 0, 0);
 	scene();
 	glPopMatrix();
 	glFlush();
@@ -105,7 +110,7 @@ static void reshape(int wx, int wy) {
 /* d'une touche alphanumerique du clavier       */
 
 static void keyboard(unsigned char key, int x, int y) {
-	cmd->CamMove(key, gridX, gridZ);
+	cmd->CamMove(key, gridX, gridZ,*camera1);
 	
 
 }
@@ -116,8 +121,8 @@ static void keyboard(unsigned char key, int x, int y) {
 /*   - touches de fonction                      */
 
 static void special(int specialKey, int x, int y) {
-	cmd->CamMoveSpecial(specialKey);
-	printf("Camera poisition = (%i ; %i ; %i)\n", cmd->camPOSX, cmd->camPOSY, cmd->camPOSZ);
+	cmd->CamMoveSpecial(specialKey, *camera1);
+	printf("Camera poisition = (%i ; %i ; %i)\n", camera1->camPOSX, camera1->camPOSY, camera1->camPOSZ);
 }
 
 /* Fonction exécutée automatiquement            */
