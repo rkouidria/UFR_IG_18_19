@@ -28,30 +28,32 @@ void Commande::CommandeInit(int x, int y, int z) {
 	camPOSZ = z;
 }
 
+/* ajouter autant d'agrument Camera, qu'il en existera */
 void Commande::CamMoveSpecial(int sk, Camera &cam) {
 	switch (sk) {
+		/*  */
 	case GLUT_KEY_UP:
-		cam.camPOSX += 1;
+		cam.posCam.px += 1;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_DOWN:
-		cam.camPOSX -= 1;
+		cam.posCam.px -= 1;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_LEFT:
-		cam.camPOSZ -= 1;
+		cam.posCam.pz -= 1;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_RIGHT:
-		cam.camPOSZ += 1;
+		cam.posCam.pz += 1;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_PAGE_UP:
-		cam.camPOSY -= 1;
+		cam.posCam.py -= 1;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_PAGE_DOWN:
-		cam.camPOSY += 1;
+		cam.posCam.py += 1;
 		glutPostRedisplay();
 		break;
 	}
@@ -62,9 +64,9 @@ void Commande::CamMove(int sk, int gridX, int gridZ, Camera &cam) {
 	switch (sk) {
 	case 'o':
 		printf("Camera's back to origin\n");
-		cam.camPOSX = gridX / 2;
-		cam.camPOSY = gridX / 2;
-		cam.camPOSZ = -gridZ / 2;
+		cam.posCam.px = gridX / 2;
+		cam.posCam.py = gridX / 2;
+		cam.posCam.pz = -gridZ / 2;
 		glutPostRedisplay();
 		break;
 	}

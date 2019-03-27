@@ -11,6 +11,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include "Camera.h"
+#include "Pos3D.h"
 
 /* Variables globales                           */
 
@@ -20,52 +21,17 @@ Camera::Camera() {}
 Camera::~Camera() {}
 
 
-void Camera::CameraInit(int x, int y, int z) {
-	camPOSX = x;
-	camPOSY = y;
-	camPOSZ = z;
+void Camera::CameraInit(int camX, int camY, int camZ, int eyeX, int eyeY, int eyeZ, int fovea, int rat, int min, int max){
+	posCam.px = camX;
+	posCam.py = camY;
+	posCam.pz = camZ;
+
+	posEye.px = eyeX;
+	posEye.py = eyeY;
+	posEye.pz = eyeZ;
+
+	fov = fovea;
+	ratio = rat;
+	cmin = min;
+	cmax = max;
 }
-/*
-
-void Commande::CamMoveSpecial(int sk) {
-	switch (sk) {
-	case GLUT_KEY_UP:
-		camPOSX += 1;
-		glutPostRedisplay();
-		break;
-	case GLUT_KEY_DOWN:
-		camPOSX -= 1;
-		glutPostRedisplay();
-		break;
-	case GLUT_KEY_LEFT:
-		camPOSZ -= 1;
-		glutPostRedisplay();
-		break;
-	case GLUT_KEY_RIGHT:
-		camPOSZ += 1;
-		glutPostRedisplay();
-		break;
-	case GLUT_KEY_PAGE_UP:
-		camPOSY -= 1;
-		glutPostRedisplay();
-		break;
-	case GLUT_KEY_PAGE_DOWN:
-		camPOSY += 1;
-		glutPostRedisplay();
-		break;
-	}
-
-}
-
-void Commande::CamMove(int sk, int gridX, int gridZ) {
-	switch (sk) {
-	case 'o':
-		printf("Camera's back to origin\n");
-		camPOSX = gridX / 2;
-		camPOSY = gridX / 2;
-		camPOSZ = -gridZ / 2;
-		glutPostRedisplay();
-		break;
-	}
-}*/
-

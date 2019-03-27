@@ -38,5 +38,7 @@ void Terrain::LoadGrid(int lon, int lar){
 }
 
 void Terrain::LoadGap(int lon, int lar) {
+	glPushMatrix();
 
+	glPopMatrix();
 }

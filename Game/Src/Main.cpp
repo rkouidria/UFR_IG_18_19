@@ -15,6 +15,7 @@
 #include "Terrain.h"
 #include "Commande.h"
 #include "Camera.h"
+#include "Pos3D.h"
 
 Terrain *terrain = new Terrain();
 Commande *cmd = new Commande();
@@ -56,9 +57,9 @@ static void init(void) {
 	glEnable(GL_DEPTH_TEST);	/* Active l'élination des PC */
 	glEnable(GL_NORMALIZE);		/* Normalise les vecteurs pour calculs illum. */
 	glClearColor(0.25,0.25,0.25,1.0);
-	//
-	//cmd->CommandeInit((int)gridX / 2, (int)gridX / 2, (int)-gridZ / 2 );
-	camera1->CameraInit((int)gridX / 2, (int)gridX / 2, (int)-gridZ / 2);
+	
+	/* Créé la caméra, placé au-dessus du terrain et regardant toujours le centre */
+	camera1->CameraInit((int)gridX / 2, (int)gridX / 2, (int)-gridZ / 2, (int)gridX / 2,0, (int)-gridZ / 2,91,1,1,700);
 
 }
 
@@ -77,7 +78,7 @@ static void display(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glPushMatrix();
-	gluLookAt(camera1->camPOSX, camera1->camPOSY, camera1->camPOSZ, camera1->camPOSX, 0, camera1->camPOSZ, 1, 0, 0);
+	gluLookAt(camera1->posCam.px, camera1->posCam.py, camera1->posCam.pz, camera1->posEye.px, camera1->posEye.py, camera1->posEye.pz, 1, 0, 0);
 	scene();
 	glPopMatrix();
 	glFlush();
@@ -98,7 +99,7 @@ static void reshape(int wx, int wy) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	gluPerspective(fov, fovRatio, 1.0, 700);
+	gluPerspective(camera1->fov, camera1->ratio, camera1->cmin, camera1->cmax);
 	printf("\n fov : %f     ration : %f\n   gridX = %f      gridZ = %f\n",fov, fovRatio, gridX,gridZ);
 	printf("dist : %f     \n", distCam);
 	glMatrixMode(GL_MODELVIEW);
@@ -122,7 +123,7 @@ static void keyboard(unsigned char key, int x, int y) {
 
 static void special(int specialKey, int x, int y) {
 	cmd->CamMoveSpecial(specialKey, *camera1);
-	printf("Camera poisition = (%i ; %i ; %i)\n", camera1->camPOSX, camera1->camPOSY, camera1->camPOSZ);
+	printf("Camera poisition = (%i ; %i ; %i) look at (%i ; %i ; %i)\n", camera1->posCam.px, camera1->posCam.py, camera1->posCam.pz, camera1->posEye.px, camera1->posEye.py, camera1->posEye.pz);
 }
 
 /* Fonction exécutée automatiquement            */
