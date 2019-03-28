@@ -10,17 +10,17 @@
 #include <GL/glut.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+
 #include "Camera.h"
 #include "Pos3D.h"
+#include "Tmp.h"
 
-/* Variables globales                           */
-
-
+/* Variables globales */
 
 Camera::Camera() {}
 Camera::~Camera() {}
 
-
+/* Initie la caméra */
 void Camera::CameraInit(int camX, int camY, int camZ, int eyeX, int eyeY, int eyeZ, int fovea, int rat, int min, int max){
 	posCam.px = camX;
 	posCam.py = camY;
@@ -34,4 +34,15 @@ void Camera::CameraInit(int camX, int camY, int camZ, int eyeX, int eyeY, int ey
 	ratio = rat;
 	cmin = min;
 	cmax = max;
+}
+
+/* Maj données de la caméra en fonction de l'emplacement de la voiture */
+void Camera::UpdateCamera2(Tmp &car) {
+	posCam.px = car.pos.px;
+	posCam.py = 50;
+	posCam.pz = car.pos.pz;
+
+	posEye.px = car.pos.px;
+	posEye.py = car.pos.py;
+	posEye.pz = car.pos.pz;
 }

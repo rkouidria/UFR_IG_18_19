@@ -16,58 +16,50 @@
 #include "Commande.h"
 #include "Camera.h"
 #include "Pos3D.h"
+#include "Tmp.h"
 
+/*  Création des objet instanciés */
 Terrain *terrain = new Terrain();
 Commande *cmd = new Commande();
 Camera *camera1 = new Camera();
+Camera *camera2 = new Camera();
+Tmp *car = new Tmp();
 
-/* Variables globales                           */
-const float PI = 3.1415926535897932384626433832795;
-const float marge = 2.0F;
+/* Variables globales */
+const float PI = 3.1415926;			// Variable mathématique PI
+int numCam = 1;						// Numéro de caméra active
 
 static int wTx = 900;              // Resolution horizontale de la fenetre
 static int wTy = 560;              // Resolution verticale de la fenetre
 static int wPx = 50;               // Position horizontale de la fenetre
 static int wPy = 50;               // Position verticale de la fenetre
 
-const float gridX = 500.0F;				// Taille plateau en X : 1X == 1 metre
-const float gridZ = 500.0F;				// Taille plateau en Z : 1Z == 1 metre
+const float gridX = 500.0F;			// Taille plateau en X : 1X == 1 metre
+const float gridZ = 500.0F;			// Taille plateau en Z : 1Z == 1 metre
+const float distCam = 500.0F;		// Distance de la caméra 1
 
-const float distCam = 500.0F;
-//const float fov =  ((atan((gridX / 2.0F)/distCam))*(360.F/PI)) + marge;			// Taille ouverture caméra
-const float fov = 90 + marge;			// Taille ouverture caméra
-const float tmpFov = 15;	/* Pour reglage temporaire afin de mieux y voir */
-const float fovRatio = atan((gridX / 2.0F) / distCam) / atan((gridZ / 2.0F) / distCam); // Ratio d'ouverture vertical
-
-
-
-
-								   /* Fonction d'initialisation des parametres     */
-								   /* OpenGL ne changeant pas au cours de la vie   */
-								   /* du programme                                 */
-
-static const GLfloat blanc[] = { 1.0,1.0,1.0,1.0 };
 
 static void init(void) {
 
-	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, blanc);
-	glEnable(GL_LIGHTING);		/* Activation des éclairages */
-	glEnable(GL_LIGHT0);		/* Une seule lumière : Soleil */
 	glDepthFunc(GL_LESS);		/* Elimination des parties cachées moins profond */
 	glEnable(GL_DEPTH_TEST);	/* Active l'élination des PC */
 	glEnable(GL_NORMALIZE);		/* Normalise les vecteurs pour calculs illum. */
-	glClearColor(0.25,0.25,0.25,1.0);
 	
-	/* Créé la caméra, placé au-dessus du terrain et regardant toujours le centre */
+	/* Initialisation des objets instanciés */
+	//car->Init(250, 1, -250, 10);
+	car->Init(350, 1, -420, 10);
 	camera1->CameraInit((int)gridX / 2, (int)gridX / 2, (int)-gridZ / 2, (int)gridX / 2,0, (int)-gridZ / 2,91,1,1,700);
-
+	camera2->CameraInit(car->pos.px, (int)gridX / 10, car->pos.pz, car->pos.px, car->pos.py, car->pos.pz, 2, 1, 1, 700);
+	
 }
 
 void scene(void) {
 
 	glPushMatrix();
 	terrain->LoadGrid(gridX, gridZ);
-	//terrain->LoadGap(gridX, gridZ);
+	terrain->LoadGap(gridX, gridZ);
+	terrain->LoadRoad();
+	car->Draw();
 	glPopMatrix();
 }
 
@@ -76,9 +68,17 @@ void scene(void) {
 
 static void display(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	glPushMatrix();
-	gluLookAt(camera1->posCam.px, camera1->posCam.py, camera1->posCam.pz, camera1->posEye.px, camera1->posEye.py, camera1->posEye.pz, 1, 0, 0);
+	switch (numCam) {
+		case 1 : 
+			gluLookAt(camera1->posCam.px, camera1->posCam.py, camera1->posCam.pz, camera1->posEye.px, camera1->posEye.py, camera1->posEye.pz, 1, 0, 0);
+			break;
+		case 2: 
+			camera2->UpdateCamera2(*car);
+			gluLookAt(camera2->posCam.px, camera2->posCam.py, camera2->posCam.pz, camera2->posEye.px, camera2->posEye.py, camera2->posEye.pz, 1, 0, 0);
+			break;
+	}
+	
 	scene();
 	glPopMatrix();
 	glFlush();
@@ -99,21 +99,29 @@ static void reshape(int wx, int wy) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	gluPerspective(camera1->fov, camera1->ratio, camera1->cmin, camera1->cmax);
-	printf("\n fov : %f     ration : %f\n   gridX = %f      gridZ = %f\n",fov, fovRatio, gridX,gridZ);
-	printf("dist : %f     \n", distCam);
+	switch (numCam) {
+		case 1: gluPerspective(camera1->fov, camera1->ratio, camera1->cmin, camera1->cmax);
+			break;
+		case 2: gluPerspective(camera2->fov, camera2->ratio, camera2->cmin, camera2->cmax);
+			break;
+	}
+
+	
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
 }
 
-/* Fonction executee lors de l'appui            */
-/* d'une touche alphanumerique du clavier       */
-
+/*	Fonction executee lors de l'appui 
+	d'une touche alphanumerique du clavier */
 static void keyboard(unsigned char key, int x, int y) {
-	cmd->CamMove(key, gridX, gridZ,*camera1);
-	
-
+	switch (key) {
+	/* permet de switch de camera */
+	case 'c': 
+		numCam == 2 ? numCam = 1 : numCam++;
+		glutPostRedisplay();
+		break;
+	}
 }
 
 /* Fonction executee lors de l'appui            */
@@ -122,8 +130,7 @@ static void keyboard(unsigned char key, int x, int y) {
 /*   - touches de fonction                      */
 
 static void special(int specialKey, int x, int y) {
-	cmd->CamMoveSpecial(specialKey, *camera1);
-	printf("Camera poisition = (%i ; %i ; %i) look at (%i ; %i ; %i)\n", camera1->posCam.px, camera1->posCam.py, camera1->posCam.pz, camera1->posEye.px, camera1->posEye.py, camera1->posEye.pz);
+	cmd->CarMoveSpecial(specialKey, *car);
 }
 
 /* Fonction exécutée automatiquement            */

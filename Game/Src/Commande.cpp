@@ -16,59 +16,46 @@
 
 /* Variables globales                           */
 
-
-
 Commande::Commande() {}
 Commande::~Commande() {}
 
 
-void Commande::CommandeInit(int x, int y, int z) {
-	camPOSX = x;
-	camPOSY = y;
-	camPOSZ = z;
-}
-
-/* ajouter autant d'agrument Camera, qu'il en existera */
-void Commande::CamMoveSpecial(int sk, Camera &cam) {
+/* Permet de déplaecr la voiture */
+void Commande::CarMoveSpecial(int sk, Tmp &car) {
 	switch (sk) {
 		/*  */
 	case GLUT_KEY_UP:
-		cam.posCam.px += 1;
+		if (car.acc <= 1) {
+			car.acc += 0.1;
+		}
+
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_DOWN:
-		cam.posCam.px -= 1;
+		if (car.acc >= 0) {
+			car.acc -= 0.1;
+		}
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_LEFT:
-		cam.posCam.pz -= 1;
+		if (car.dir <= 0.5) {
+			car.dir += 0.1;
+			car.rot += 9;
+		}
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_RIGHT:
-		cam.posCam.pz += 1;
+		if(car.dir >= -0.5) {
+			car.dir -= 0.1;
+			car.rot -= 9;
+		}
 		glutPostRedisplay();
 		break;
-	case GLUT_KEY_PAGE_UP:
-		cam.posCam.py -= 1;
-		glutPostRedisplay();
-		break;
-	case GLUT_KEY_PAGE_DOWN:
-		cam.posCam.py += 1;
-		glutPostRedisplay();
-		break;
+	
 	}
 
 }
 
-void Commande::CamMove(int sk, int gridX, int gridZ, Camera &cam) {
-	switch (sk) {
-	case 'o':
-		printf("Camera's back to origin\n");
-		cam.posCam.px = gridX / 2;
-		cam.posCam.py = gridX / 2;
-		cam.posCam.pz = -gridZ / 2;
-		glutPostRedisplay();
-		break;
-	}
-}
+
+
 

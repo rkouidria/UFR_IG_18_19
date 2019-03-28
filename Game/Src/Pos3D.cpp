@@ -10,11 +10,10 @@
 #include <GL/glut.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+
 #include "Pos3D.h"
 
-/* Variables globales                           */
-
-
+/* Variables globales */
 
 Pos3D::Pos3D() {}
 Pos3D::~Pos3D() {}
