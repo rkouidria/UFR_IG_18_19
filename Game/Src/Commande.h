@@ -2,7 +2,7 @@
 
 #include "Commande.h"
 #include "Camera.h"
-#include "Tmp.h"
+#include "Voiture.h"
 
 class Commande
 {
@@ -11,7 +11,7 @@ public:
 	Commande();
 	~Commande();
 
-	void Commande::CarMoveSpecial(int sk, Tmp &car);
+	void Commande::CarMoveSpecial(int sk, Voiture &car);
 
 
 

@@ -16,14 +16,15 @@
 #include "Commande.h"
 #include "Camera.h"
 #include "Pos3D.h"
-#include "Tmp.h"
+#include "Voiture.h"
 
 /*  Création des objet instanciés */
 Terrain *terrain = new Terrain();
 Commande *cmd = new Commande();
 Camera *camera1 = new Camera();
 Camera *camera2 = new Camera();
-Tmp *car = new Tmp();
+//Tmp *car = new Tmp();
+Voiture *voiture = new Voiture();
 
 /* Variables globales */
 const float PI = 3.1415926;			// Variable mathématique PI
@@ -47,9 +48,8 @@ static void init(void) {
 	
 	/* Initialisation des objets instanciés */
 	//car->Init(250, 1, -250, 10);
-	car->Init(350, 1, -420, 10);
 	camera1->CameraInit((int)gridX / 2, (int)gridX / 2, (int)-gridZ / 2, (int)gridX / 2,0, (int)-gridZ / 2,91,1,1,700);
-	camera2->CameraInit(car->pos.px, (int)gridX / 10, car->pos.pz, car->pos.px, car->pos.py, car->pos.pz, 2, 1, 1, 700);
+	camera2->CameraInit(voiture->posVX, (int)gridX / 10, voiture->posVZ, voiture->posVX, voiture->tailleVY /2, voiture->posVZ, 2, 1, 1, 700);
 	
 }
 
@@ -59,7 +59,7 @@ void scene(void) {
 	terrain->LoadGrid(gridX, gridZ);
 	terrain->LoadGap(gridX, gridZ);
 	terrain->LoadRoad();
-	car->Draw();
+	voiture->affVoiture();
 	glPopMatrix();
 }
 
@@ -74,7 +74,7 @@ static void display(void) {
 			gluLookAt(camera1->posCam.px, camera1->posCam.py, camera1->posCam.pz, camera1->posEye.px, camera1->posEye.py, camera1->posEye.pz, 1, 0, 0);
 			break;
 		case 2: 
-			camera2->UpdateCamera2(*car);
+			camera2->UpdateCamera2(*voiture);
 			gluLookAt(camera2->posCam.px, camera2->posCam.py, camera2->posCam.pz, camera2->posEye.px, camera2->posEye.py, camera2->posEye.pz, 1, 0, 0);
 			break;
 	}
@@ -130,7 +130,7 @@ static void keyboard(unsigned char key, int x, int y) {
 /*   - touches de fonction                      */
 
 static void special(int specialKey, int x, int y) {
-	cmd->CarMoveSpecial(specialKey, *car);
+	cmd->CarMoveSpecial(specialKey, *voiture);
 }
 
 /* Fonction exécutée automatiquement            */

@@ -21,10 +21,10 @@ Commande::~Commande() {}
 
 
 /* Permet de déplaecr la voiture */
-void Commande::CarMoveSpecial(int sk, Tmp &car) {
-	switch (sk) {
+void Commande::CarMoveSpecial(int sk, Voiture &car) {
+	//switch (sk) {
 		/*  */
-	case GLUT_KEY_UP:
+	/*case GLUT_KEY_UP:
 		if (car.acc <= 1) {
 			car.acc += 0.1;
 		}
@@ -52,7 +52,7 @@ void Commande::CarMoveSpecial(int sk, Tmp &car) {
 		glutPostRedisplay();
 		break;
 	
-	}
+	}*/
 
 }
 

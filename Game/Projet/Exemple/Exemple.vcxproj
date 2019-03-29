@@ -101,17 +101,23 @@
   <ItemGroup>
     <ClCompile Include="..\..\Src\Camera.cpp" />
     <ClCompile Include="..\..\Src\Commande.cpp" />
+    <ClCompile Include="..\..\Src\Decors.cpp" />
     <ClCompile Include="..\..\Src\Main.cpp" />
+    <ClCompile Include="..\..\Src\Outils.cpp" />
+    <ClCompile Include="..\..\Src\Panneau.cpp" />
     <ClCompile Include="..\..\Src\Pos3D.cpp" />
     <ClCompile Include="..\..\Src\Terrain.cpp" />
-    <ClCompile Include="..\..\Src\Tmp.cpp" />
+    <ClCompile Include="..\..\Src\Voiture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Camera.h" />
     <ClInclude Include="..\..\Src\Commande.h" />
+    <ClInclude Include="..\..\Src\Decors.h" />
+    <ClInclude Include="..\..\Src\Outils.h" />
+    <ClInclude Include="..\..\Src\Panneau.h" />
     <ClInclude Include="..\..\Src\Pos3D.h" />
     <ClInclude Include="..\..\Src\Terrain.h" />
-    <ClInclude Include="..\..\Src\Tmp.h" />
+    <ClInclude Include="..\..\Src\Voiture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

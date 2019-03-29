@@ -2,7 +2,7 @@
 
 #include "Camera.h"
 #include "Pos3D.h"
-#include "Tmp.h"
+#include "Voiture.h"
 
 class Camera
 {
@@ -19,7 +19,7 @@ public:
 	int cmax;
 
 	void Camera::CameraInit(int camX, int camY, int camZ, int eyeX, int eyeY,int eyeZ, int fovea, int ratio, int min, int max);
-	void Camera::UpdateCamera2(Tmp &car);
+	void Camera::UpdateCamera2(Voiture &car);
 
 
 };

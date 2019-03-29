@@ -13,7 +13,7 @@
 
 #include "Camera.h"
 #include "Pos3D.h"
-#include "Tmp.h"
+#include "Voiture.h"
 
 /* Variables globales */
 
@@ -37,12 +37,12 @@ void Camera::CameraInit(int camX, int camY, int camZ, int eyeX, int eyeY, int ey
 }
 
 /* Maj données de la caméra en fonction de l'emplacement de la voiture */
-void Camera::UpdateCamera2(Tmp &car) {
-	posCam.px = car.pos.px;
+void Camera::UpdateCamera2(Voiture &car) {
+	posCam.px = car.posVX;
 	posCam.py = 50;
-	posCam.pz = car.pos.pz;
+	posCam.pz = car.posVZ;
 
-	posEye.px = car.pos.px;
-	posEye.py = car.pos.py;
-	posEye.pz = car.pos.pz;
+	posEye.px = car.posVX;
+	posEye.py = car.tailleVY / 2;
+	posEye.pz = car.posVZ;
 }
