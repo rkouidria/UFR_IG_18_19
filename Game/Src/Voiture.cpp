@@ -38,6 +38,11 @@ void Voiture::init(double x, double z, double tx, double tz, double ty) {
 	nbEchap = 2;
 	rotRoue = 360;
 	nom = "La meilleur";
+	initPos();
+}
+
+void Voiture::initPos() {
+	posCapo[0] = new Pos3D();
 }
 
 void Voiture::toString() {

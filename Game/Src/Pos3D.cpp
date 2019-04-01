@@ -16,7 +16,14 @@
 /* Variables globales */
 
 Pos3D::Pos3D() {}
+Pos3D::Pos3D(double x, double y, double z) {
+	init(x, y, z);
+}
 Pos3D::~Pos3D() {}
 
-
+void Pos3D::init(double x, double y, double z) {
+	px = x;
+	py = y;
+	pz = z;
+}
 

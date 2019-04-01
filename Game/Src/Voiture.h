@@ -1,4 +1,6 @@
 #pragma once
+#include "Pos3D.h"
+
 
 class Voiture
 {
@@ -19,6 +21,8 @@ public:
 
 	char* nom;
 
+	Pos3D *posCapo[4];
+
 	Voiture(void);
 	Voiture(double x, double z);
 	Voiture(double x, double z, double tx, double tz, double ty);
@@ -29,6 +33,7 @@ public:
 
 private:
 	void init(double x, double z, double tx, double tz, double ty);
+	void initPos();
 	void vitreAvant();
 	void cote();
 	void coteDroit();
