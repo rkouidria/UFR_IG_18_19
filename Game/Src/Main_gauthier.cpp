@@ -30,10 +30,12 @@ static double vz = 10.0;
 
 static Voiture *voiture;
 static Decors *decors;
+static Decors *decors2;
 
 static void init() {
 	voiture = new Voiture();
-	decors = new Panneau();
+	decors = new Panneau(5, 0, 0, 0, 1.5);
+	decors2 = new Panneau(-5, 0, 0, 2, 1.5);
 
 	glClearColor(0.25F, 0.25F, 0.25F, 1.0F);
 	glEnable(GL_LIGHTING);
@@ -60,7 +62,8 @@ static void scene(void) {
 	glPushMatrix();
 	//repere();
 	voiture->affVoiture();
-	//decors->affObjet();
+	decors->affObjet();
+	decors2->affObjet();
 	glPopMatrix();
 }
 

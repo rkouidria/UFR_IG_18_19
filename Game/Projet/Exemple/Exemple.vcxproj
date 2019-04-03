@@ -102,7 +102,7 @@
     <ClCompile Include="..\..\Src\Camera.cpp" />
     <ClCompile Include="..\..\Src\Commande.cpp" />
     <ClCompile Include="..\..\Src\Decors.cpp" />
-    <ClCompile Include="..\..\Src\Main.cpp" />
+    <ClCompile Include="..\..\Src\Main_gauthier.cpp" />
     <ClCompile Include="..\..\Src\Outils.cpp" />
     <ClCompile Include="..\..\Src\Panneau.cpp" />
     <ClCompile Include="..\..\Src\Pos2D.cpp" />
