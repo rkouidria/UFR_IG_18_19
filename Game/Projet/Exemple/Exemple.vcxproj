@@ -99,10 +99,13 @@
     <Library Include="..\..\Lib\glut32.ms.lib" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Src\Arbre.cpp" />
     <ClCompile Include="..\..\Src\Camera.cpp" />
     <ClCompile Include="..\..\Src\Commande.cpp" />
     <ClCompile Include="..\..\Src\Decors.cpp" />
+    <ClCompile Include="..\..\Src\Immeuble.cpp" />
     <ClCompile Include="..\..\Src\Main_gauthier.cpp" />
+    <ClCompile Include="..\..\Src\Maison.cpp" />
     <ClCompile Include="..\..\Src\Montagne.cpp" />
     <ClCompile Include="..\..\Src\Outils.cpp" />
     <ClCompile Include="..\..\Src\Panneau.cpp" />
@@ -112,9 +115,12 @@
     <ClCompile Include="..\..\Src\Voiture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\Arbre.h" />
     <ClInclude Include="..\..\Src\Camera.h" />
     <ClInclude Include="..\..\Src\Commande.h" />
     <ClInclude Include="..\..\Src\Decors.h" />
+    <ClInclude Include="..\..\Src\Immeuble.h" />
+    <ClInclude Include="..\..\Src\Maison.h" />
     <ClInclude Include="..\..\Src\Montagne.h" />
     <ClInclude Include="..\..\Src\Outils.h" />
     <ClInclude Include="..\..\Src\Panneau.h" />

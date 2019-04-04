@@ -7,8 +7,10 @@
 #include <GL/glu.h>
 
 #include "Voiture.h"
+#include "Outils.h"
 #include "Panneau.h"
 #include "Montagne.h"
+#include "Immeuble.h"
 
 static int wTx = 800;              // Resolution horizontale de la fenetre
 static int wTy = 800;              // Resolution verticale de la fenetre
@@ -38,7 +40,7 @@ static void init() {
 	voiture = new Voiture();
 	decors = new Panneau(5, 0, 25, 0, 2);
 	decors2 = new Panneau(-5, 0, 150, 1, 1.5);
-	mont = new Montagne();
+	mont = new Immeuble();
 
 	glClearColor(0.25F, 0.25F, 0.25F, 1.0F);
 	glEnable(GL_LIGHTING);
@@ -63,7 +65,7 @@ static void scene(void) {
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, blanc);
 	glPopMatrix();
 	glPushMatrix();
-	//repere();
+	Outils::repere();
 	voiture->affVoiture();
 	decors->affObjet();
 	decors2->affObjet();
@@ -94,7 +96,7 @@ static void reshape(int wx, int wy) {
 	glViewport(0, 0, wx, wy);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-10.0, 10.0, -10.0, 10.0, -100.0, 100.0);
+	glOrtho(-30.0, 30.0, -30.0, 30.0, -100.0, 100.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }

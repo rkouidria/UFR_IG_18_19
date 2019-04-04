@@ -51,6 +51,15 @@
     <ClCompile Include="..\..\Src\Montagne.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\Immeuble.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Maison.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Arbre.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Terrain.h">
@@ -81,6 +90,15 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Montagne.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Immeuble.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Maison.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Arbre.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
