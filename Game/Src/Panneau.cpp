@@ -38,6 +38,7 @@ void Panneau::affObjet() {
 void Panneau::affCarre(double taille) {
 	glPushMatrix();
 	glTranslatef(posX, taille / 2, posZ);
+	glRotatef(rot, 0.0F, 1.0F, 0.0F);
 	Outils::mySolidCylinder(taille,0.1,10);
 	glTranslatef(0, (taille / 2) + (taille / 4), 0);
 	glScalef(1.0,1.0,0.2);
@@ -47,29 +48,35 @@ void Panneau::affCarre(double taille) {
 
 void Panneau::affRectangle(double taille) {
 	glPushMatrix();
-	glTranslatef(posX - (taille / 2), taille / 2, posZ);
-	Outils::mySolidCylinder(taille, 0.1, 10);
+	glTranslatef(posX, taille / 2, posZ);
+	glRotatef(rot, 0.0F, 1.0F, 0.0F);
+	glTranslatef(- (taille / 2), 0, 0);
+	Outils::mySolidCylinder(taille, 0.1, 10); printf("%f", taille + ((taille / 2) * 1.5));
 	glTranslatef(taille, 0, 0);
 	Outils::mySolidCylinder(taille, 0.1, 10);
 	glPopMatrix();
 	glPushMatrix();
-	glTranslatef(posX, taille + (taille / 2), posZ);
-	glScalef(4.0, 2.0, 0.2);
+	glTranslatef(posX, taille + ((taille / 2) * 1.5) / 2, posZ);
+	glRotatef(rot, 0.0F, 1.0F, 0.0F);
+	glScalef(4.0, 1.5, 0.2);
 	glutSolidCube(taille / 2);
 	glPopMatrix();
 }
 
 void Panneau::affDepart(double taille, double ecart) {
 	glPushMatrix();
-	glTranslatef(posX - (ecart / 2), taille * 2, posZ);
+	glTranslatef(posX, taille * 2, posZ);
+	glRotatef(rot, 0.0F, 1.0F, 0.0F);
+	glTranslatef(- (ecart / 2), 0, 0);
 	Outils::mySolidCylinder(taille * 4, 0.1, 10);
 	glTranslatef(ecart, 0, 0);
 	Outils::mySolidCylinder(taille * 4, 0.1, 10);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(posX, (taille * 4) - (taille / 4), posZ);
+	glTranslatef(posX, (taille * 4) - 0.5, posZ);
+	glRotatef(rot, 0.0F, 1.0F, 0.0F);
 	glScalef(ecart, 1.0, 0.2);
-	glutSolidCube(taille / 2);
+	glutSolidCube(1);
 	glPopMatrix();
 }

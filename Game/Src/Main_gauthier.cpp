@@ -8,6 +8,7 @@
 
 #include "Voiture.h"
 #include "Panneau.h"
+#include "Montagne.h"
 
 static int wTx = 800;              // Resolution horizontale de la fenetre
 static int wTy = 800;              // Resolution verticale de la fenetre
@@ -31,11 +32,13 @@ static double vz = 10.0;
 static Voiture *voiture;
 static Decors *decors;
 static Decors *decors2;
+static Decors *mont;
 
 static void init() {
 	voiture = new Voiture();
-	decors = new Panneau(5, 0, 0, 0, 1.5);
-	decors2 = new Panneau(-5, 0, 0, 2, 1.5);
+	decors = new Panneau(5, 0, 25, 0, 2);
+	decors2 = new Panneau(-5, 0, 150, 1, 1.5);
+	mont = new Montagne();
 
 	glClearColor(0.25F, 0.25F, 0.25F, 1.0F);
 	glEnable(GL_LIGHTING);
@@ -64,6 +67,7 @@ static void scene(void) {
 	voiture->affVoiture();
 	decors->affObjet();
 	decors2->affObjet();
+	mont->affObjet();
 	glPopMatrix();
 }
 
