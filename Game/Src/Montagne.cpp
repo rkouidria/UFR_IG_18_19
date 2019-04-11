@@ -12,8 +12,8 @@
 
 Montagne::Montagne(void) : Decors() {
 	hauteur = 10;
-	circ = 24;
-	nbPente = 50;
+	circ = 40;
+	nbPente = 100;
 	nbMont = 10;
 	tr = time(NULL);
 }
