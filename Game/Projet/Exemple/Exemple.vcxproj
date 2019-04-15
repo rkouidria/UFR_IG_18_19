@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Arbre.cpp" />
+    <ClCompile Include="..\..\Src\Bonhomme.cpp" />
     <ClCompile Include="..\..\Src\Camera.cpp" />
     <ClCompile Include="..\..\Src\Commande.cpp" />
     <ClCompile Include="..\..\Src\Decors.cpp" />
@@ -116,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Arbre.h" />
+    <ClInclude Include="..\..\Src\Bonhomme.h" />
     <ClInclude Include="..\..\Src\Camera.h" />
     <ClInclude Include="..\..\Src\Commande.h" />
     <ClInclude Include="..\..\Src\Decors.h" />

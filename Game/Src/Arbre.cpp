@@ -20,6 +20,9 @@ Arbre::Arbre(double x, double z, double rot, int mod) : Decors(x, z, rot) {
 Arbre::~Arbre() {}
 
 void Arbre::affObjet() {
+	glPushMatrix();
+	glRotatef(rot, 0.0F, 1.0F, 0.0F);
+	glTranslatef(posX, 0.0, posZ);
 	switch (modele) {
 	case 0:
 		arbre0();
@@ -33,14 +36,13 @@ void Arbre::affObjet() {
 	case 3:
 		arbre3();
 		break;
-
 	}
+	glPopMatrix();
 }
 
 void Arbre::arbre0() {
 	glPushMatrix();
-	glRotatef(rot, 0.0F, 1.0F, 0.0F);
-	glTranslatef(posX, 1.5, posZ);
+	glTranslatef(0.0, 1.5, 0.0);
 	Outils::mySolidCylinder(3.0, 0.25, 10.0);
 	glTranslatef(0, 2.5, 0);
 	glScalef(1.0, 1.5, 1.0);
@@ -50,8 +52,7 @@ void Arbre::arbre0() {
 
 void Arbre::arbre1() {
 	glPushMatrix();
-	glRotatef(rot, 0.0F, 1.0F, 0.0F);
-	glTranslatef(posX, 1.5, posZ);
+	glTranslatef(0.0, 1.5, 0.0);
 	Outils::mySolidCylinder(3.0, 0.25, 10.0);
 	glTranslatef(0, 3.0, 0);
 	glScalef(1.0, 3.0, 1.0);
@@ -61,22 +62,26 @@ void Arbre::arbre1() {
 
 void Arbre::arbre2() {
 	glPushMatrix();
-	glRotatef(rot, 0.0F, 1.0F, 0.0F);
-	glTranslatef(posX, 1.5, posZ);
+	glTranslatef(0.0, 1.5, 0.0);
 	Outils::mySolidCylinder(3.0, 0.25, 10.0);
-	glTranslatef(0, 3.0, 0);
-	glScalef(1.0, 10.0, 1.0);
-	glutSolidSphere(1.0,10.0,30.0);
+	glTranslatef(0, 0.0, 0);
+	glRotatef(-90.0F, 1.0F, 0.0F, 0.0F);
+	glutSolidCone(2.0, 5.0, 10.0, 5.0);
 	glPopMatrix();
 }
 
 void Arbre::arbre3() {
 	glPushMatrix();
-	glRotatef(rot, 0.0F, 1.0F, 0.0F);
-	glTranslatef(posX, 1.5, posZ);
+	glTranslatef(0.0, 1.5, 0.0);
 	Outils::mySolidCylinder(3.0, 0.25, 10.0);
-	glTranslatef(0, 2.5, 0);
-	glScalef(1.0, 1.5, 1.0);
-	glutSolidCube(2.0);
+	glPushMatrix();
+	glRotatef(-90.0F, 1.0F, 0.0F, 0.0F);
+	glutSolidCone(2.5, 4.0, 10.0, 5.0);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0, 2.0, 0);
+	glRotatef(-90.0F, 1.0F, 0.0F, 0.0F);
+	glutSolidCone(2.0, 4.0, 10.0, 5.0);
+	glPopMatrix();
 	glPopMatrix();
 }

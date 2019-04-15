@@ -12,6 +12,7 @@
 #include "Montagne.h"
 #include "Immeuble.h"
 #include "Arbre.h"
+#include "Bonhomme.h"
 
 static int wTx = 800;              // Resolution horizontale de la fenetre
 static int wTy = 800;              // Resolution verticale de la fenetre
@@ -36,12 +37,16 @@ static Voiture *voiture;
 static Decors *decors;
 static Decors *decors2;
 static Decors *mont;
+static Decors *b1;
+static Decors *b2;
 
 static void init() {
 	voiture = new Voiture();
 	decors = new Panneau(5, 0, 25, 0, 2);
 	decors2 = new Panneau(-5, 0, 150, 1, 1.5);
-	mont = new Arbre(5,5,0,1);
+	mont = new Arbre(5, 5, 0, 3);
+	b1 = new Bonhomme(0.0, 5.0, 0.0, 0, 2.0);
+	b2 = new Bonhomme(0.0, -5.0, 0.0, 1, 2.0);
 
 	glClearColor(0.25F, 0.25F, 0.25F, 1.0F);
 	glEnable(GL_LIGHTING);
@@ -71,6 +76,8 @@ static void scene(void) {
 	decors->affObjet();
 	decors2->affObjet();
 	mont->affObjet();
+	b1->affObjet();
+	b2->affObjet();
 	glPopMatrix();
 }
 

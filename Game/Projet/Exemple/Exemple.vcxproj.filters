@@ -60,6 +60,9 @@
     <ClCompile Include="..\..\Src\Arbre.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\Bonhomme.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Terrain.h">
@@ -99,6 +102,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Arbre.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Bonhomme.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
